@@ -35,8 +35,8 @@ export default {
   name: 'login',
   data () {
     return {
-      username: '',
-      password: '',
+      username: '13932493200',
+      password: '000000',
       error: false,
       errInfo: ''
     }
@@ -53,13 +53,23 @@ export default {
         this.errInfo = '请填写用户密码'
         return
       }
-      if (this.username !== 'caicai') {
+      this.$http.post('merchant/login', { loginName: this.username, loginPassword: this.password }, { type: 'form' }
+      ).then((res) => {
+        console.log('login/res: ', res)
+        this.$store.commit('SET_USER_INFO', JSON.stringify(res))
+        this.$message({
+          message: '登录成功',
+          type: 'success'
+        })
+        this.$router.push('/index')
+        // setTimeout(() => {
+        //   this.$router.push('/index')
+        // }, 500)
+      }).catch((error) => {
         this.error = true
-        this.errInfo = '用户名或密码错误'
-        return
-      }
-      this.error = false
-      this.$router.push('/home')
+        console.log('login/error: ', error)
+        this.errInfo = error.msg
+      })
     }
   }
 }

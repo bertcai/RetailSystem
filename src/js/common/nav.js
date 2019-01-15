@@ -1,26 +1,26 @@
 export default {
   index: {
     title: '首页',
-    path: 'index/systemIndex',
+    path: '/index/systemIndex',
     child: [
       {
         sub: '系统首页',
         menu: [
           {
             name: '系统首页',
-            path: 'index/systemIndex'
+            path: '/index/systemIndex'
           },
           {
             name: '账户设置',
-            path: 'index/accountSetting'
+            path: '/index/accountSetting'
           },
           {
             name: '系统信息',
-            path: 'index/systemInfo'
+            path: '/index/systemInfo'
           },
           {
             name: '登录日志',
-            path: 'index/loginLog'
+            path: '/index/loginLog'
           }
         ]
       }
@@ -28,26 +28,26 @@ export default {
   },
   goods: {
     title: '商品',
-    path: 'goods/goodsList',
+    path: '/goods/goodsList',
     child: [
       {
         sub: '商品管理',
         menu: [
           {
             name: '商品列表',
-            path: 'goods/goodsList'
+            path: '/goods/goodsList'
           },
           {
             name: '添加商品',
-            path: 'goods/addGoods'
+            path: '/goods/addGoods'
           },
           {
             name: '商品回收站',
-            path: 'goods/goodsRecycle'
+            path: '/goods/goodsRecycle'
           },
           {
             name: '商品评价',
-            path: 'goods/goodsComment'
+            path: '/goods/goodsComment'
           }
         ]
       },
@@ -57,19 +57,19 @@ export default {
         menu: [
           {
             name: '商品分类',
-            path: 'goods/goodsCategory'
+            path: '/goods/goodsCategory'
           },
           {
             name: '商品类型',
-            path: 'goods/goodsType'
+            path: '/goods/goodsType'
           },
           {
             name: '品牌管理',
-            path: 'goods/brandManage'
+            path: '/goods/brandManage'
           },
           {
             name: '图片库管理',
-            path: 'goods/imgManage'
+            path: '/goods/imgManage'
           }
         ]
       }
@@ -77,22 +77,22 @@ export default {
   },
   order: {
     title: '订单',
-    path: 'order/orderList',
+    path: '/order/orderList',
     child: [
       {
         sub: '订单管理',
         menu: [
           {
             name: '订单列表',
-            path: 'order/orderList'
+            path: '/order/orderList'
           },
           {
             name: '确认收货',
-            path: 'order/confirm'
+            path: '/order/confirm'
           },
           {
             name: '订单设置',
-            path: 'order/orderSetting'
+            path: '/order/orderSetting'
           }
         ]
       },
@@ -101,15 +101,15 @@ export default {
         menu: [
           {
             name: '退货申请处理',
-            path: 'order/return'
+            path: '/order/return'
           },
           {
             name: '退款申请处理',
-            path: 'order/refund'
+            path: '/order/refund'
           },
           {
             name: '退货原因设置',
-            path: 'order/returnReason'
+            path: '/order/returnReason'
           }
         ]
       }
@@ -117,18 +117,18 @@ export default {
   },
   stock: {
     title: '库存',
-    path: 'stock/storage',
+    path: '/stock/storage',
     child: [
       {
         sub: '库存记录',
         menu: [
           {
             name: '商品入库',
-            path: 'stock/storage'
+            path: '/stock/storage'
           },
           {
             name: '商品出库',
-            path: 'stock/out'
+            path: '/stock/out'
           }
         ]
       }
@@ -136,14 +136,14 @@ export default {
   },
   user: {
     title: '用户',
-    path: 'user/userList',
+    path: '/user/userList',
     child: [
       {
         sub: '用户管理',
         menu: [
           {
             name: '用户列表',
-            path: 'user/userList'
+            path: '/user/userList'
           }
         ]
       }
@@ -151,18 +151,18 @@ export default {
   },
   promotion: {
     title: '促销',
-    path: 'promotion/spikeList',
+    path: '/promotion/spikeList',
     child: [
       {
         sub: '秒杀专区',
         menu: [
           {
             name: '秒杀活动列表',
-            path: 'promotion/spikeList'
+            path: '/promotion/spikeList'
           },
           {
             name: '时间段列表',
-            path: 'promotion/timeList'
+            path: '/promotion/timeList'
           }
         ]
       }
@@ -170,41 +170,41 @@ export default {
   },
   operation: {
     title: '运营',
-    path: 'operation/adList',
+    path: '/operation/adList',
     child: [
       {
         sub: '广告管理',
         menu: [
           {
             name: '广告列表',
-            path: 'operation/adList'
+            path: '/operation/adList'
           },
           {
             name: '添加广告',
-            path: 'operation/addAd'
+            path: '/operation/addAd'
           }
         ]
       }
     ]
   },
   statistics: {
-    title: '运营',
-    path: 'statistics/tranStatistics',
+    title: '统计',
+    path: '/statistics/tranStatistics',
     child: [
       {
         sub: '统计分析',
         menu: [
           {
             name: '交易统计',
-            path: 'statistics/tranStatistics'
+            path: '/statistics/tranStatistics'
           },
           {
             name: '商品统计',
-            path: 'statistics/goodsStatistics'
+            path: '/statistics/goodsStatistics'
           },
           {
             name: '搜索统计',
-            path: 'statistics/searchStatistics'
+            path: '/statistics/searchStatistics'
           }
         ]
       }
@@ -212,44 +212,46 @@ export default {
   },
   finance: {
     title: '财务',
-    path: 'finance/comprehensiveStatistics',
+    path: '/finance/comprehensiveStatistics',
     child: [
       {
         sub: '财务报表',
         menu: [
           {
             name: '综合统计',
-            path: 'finance/comprehensiveStatistics'
+            path: '/finance/comprehensiveStatistics'
           },
           {
             name: '销售统计',
-            path: 'finance/salesStatistics'
+            path: '/finance/salesStatistics'
           }
         ]
       },
       {
         sub: '对账管理',
-        menu: {
-          name: '对账列表',
-          path: 'finance/reconciliationList'
-        }
+        menu: [
+          {
+            name: '对账列表',
+            path: '/finance/reconciliationList'
+          }
+        ]
       }
     ]
   },
   settings: {
     title: '设置',
-    path: 'settings/logistics',
+    path: '/settings/logistics',
     child: [
       {
         sub: '基础设置',
         menu: [
           {
             name: '物流追踪',
-            path: 'settings/logistics'
+            path: '/settings/logistics'
           },
           {
             name: '区域设置',
-            path: 'settings/areaSetting'
+            path: '/settings/areaSetting'
           }
         ]
       }
@@ -257,14 +259,14 @@ export default {
   },
   permission: {
     title: '权限',
-    path: 'permission/operationLog',
+    path: '/permission/operationLog',
     child: [
       {
         sub: '权限管理',
         menu: [
           {
             name: '操作日志',
-            path: 'permission/operationLog'
+            path: '/permission/operationLog'
           }
         ]
       }

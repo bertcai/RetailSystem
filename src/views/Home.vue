@@ -5,8 +5,9 @@
         <div class="banner">
           零售
         </div>
-        <div class="item" v-for="(item,index) in navItems" :key="index">
-          <el-button type="text">{{item}}</el-button>
+        <div class="item" v-for="(item,index) in nav" :key="index" @click="switchNav(item.path)"
+             :class="index === activeNav ? 'active' : ''">
+          {{item.title}}
         </div>
         <div class="action-item">
           <span></span>
@@ -20,30 +21,44 @@
           <span></span>
           <img src="../assets/nav/u2320.png" id="home" @click="toHome">
         </div>
-        <div class="action-item" id="user-info">
+        <div class="action-item" id="user-info" v-popover:userInfo>
           <span></span>
           <img src="../assets/nav/u2318.png" style="border-left: none; height: 30px; margin-right: 10px;">
-          admin
+          {{userInfo.merchantName}}
         </div>
+        <el-popover placement="bottom" ref="userInfo" trigger="hover" width="360">
+          <div class="popover">
+            <p class="title">
+              <span>
+                登录信息
+              </span>
+              <span class="fr" @click="$router.push('/index/accountSetting')">
+                账户设置
+              </span>
+            </p>
+            <p>• 本次登录：{{loginData[0].operateTime}}</p>
+            <p>• 登陆地区：XXX(IP: {{loginData[0].ip}})</p>
+            <p>• 上次登录：{{loginData[1].operateTime}}</p>
+          </div>
+        </el-popover>
       </el-header>
       <el-container>
-        <div class="side" ref="side">
-          <el-aside width="200px">
-            <el-menu mode="vertical" background-color="#EAEDF1"
-                     text-color="#000"
-                     active-text-color="#1ABC9C">
-              <el-menu-item-group v-for="(items,index) in menuItems" :key="index">
-                <div class="group-title">
-                  {{items.name}}
-                </div>
-                <el-menu-item v-for="(item,index) in items.content" :key="index" :index="item">
-                  {{item}}
-                </el-menu-item>
-              </el-menu-item-group>
-            </el-menu>
-          </el-aside>
-        </div>
-        <el-main>Main</el-main>
+        <el-aside width="200px" :style="{'height':mainHeight + 'px'}">
+          <div class="menu">
+            <ul class="menu-group" v-for="(items,index) in menu" :key="index">
+              <li class="group-title">
+                {{items.sub}}
+              </li>
+              <router-link tag="li" v-for="(child,idx) in items.menu" :key="idx" :to="child.path"
+                           active-class="is-active" class="menu-item">
+                {{child.name}}
+              </router-link>
+            </ul>
+          </div>
+        </el-aside>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -51,23 +66,27 @@
 
 <script>
 // @ is an alias to /src
+import nav from '@/js/common/nav.js'
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'home',
   data () {
     return {
-      menuItems: [
-        {
-          name: '系统首页',
-          content: [
-            '系统首页',
-            '账户设置',
-            '系统信息',
-            '登录日志'
-          ]
-        }
-      ],
-      clientHeight: '',
-      navItems: ['首页', '商品', '订单', '库存', '用户', '促销', '运营', '统计', '财务', '设置', '权限']
+      nav: nav,
+      mainHeight: window.innerHeight - 90,
+      loginData: [{}, {}]
+    }
+  },
+  computed: {
+    activeNav () {
+      return this.$store.getters.activeNav
+    },
+    menu () {
+      return nav[this.$store.getters.activeNav].child
+    },
+    userInfo () {
+      return JSON.parse(this.$store.getters.userInfo)
     }
   },
   methods: {
@@ -75,26 +94,29 @@ export default {
       this.$router.push('/login')
     },
     toHome () {
-      this.$router.push('/home')
+      this.$router.push('/index')
+      this.setActiveNav('index')
     },
-    changeFixed (clientHeight) {
-      console.log(clientHeight)
-      console.log(this.$refs.side.style)
-      this.$refs.side.style.height = clientHeight - 50 + 'px'
-    }
+    switchNav (path) {
+      const str = path.split('/')[1]
+      this.setActiveNav(str)
+      this.$router.push(path)
+    },
+    ...mapMutations({
+      setActiveNav: 'SET_ACTIVE_NAV'
+    })
   },
   mounted () {
-    // 获取浏览器可视区域高度
-    this.clientHeight = `${document.documentElement.clientHeight}`
-    window.onresize = function temp () {
-      this.clientHeight = `${document.documentElement.clientHeight}`
-    }
-  },
-  watch: {
-    // 如果 `clientHeight` 发生改变，这个函数就会运行
-    clientHeight: function () {
-      this.changeFixed(this.clientHeight)
-    }
+    this.$http.post('merchant/get_merchant_login_info_list', {
+      currentPage: 1,
+      pageSize: 10,
+      orderBy: 'operate_time desc'
+    }, { type: 'form' }).then((res) => {
+      console.log('home.mounted.res: ', res)
+      this.loginData = res.list
+    }).catch((error) => {
+      console.log('home.mounted.error', error)
+    })
   }
 }
 </script>
@@ -103,6 +125,7 @@ export default {
   .el-container
     .el-header
       background-color: rgba(70, 76, 91, 0.898)
+      min-width: 1300px
       .banner
         line-height: 50px
         float: left
@@ -120,11 +143,9 @@ export default {
         text-align: center
         color: white
         font-size: 12px
-        .el-button
-          font-size: 12px
-          color: white
-        .el-button:hover
-          color: #e4e4e4
+        cursor: pointer
+      .item:hover
+        color: #e4e4e4
       .active
         background-color: rgb(130, 134, 144)
       .action-item
@@ -150,29 +171,39 @@ export default {
           height: 100%
           vertical-align: middle
     .el-container
-      .side
-        width: 200px
-        .el-aside
-          height: 100%
-          background-color: rgb(234, 237, 241)
+      .el-aside
+        height: 100%
+        background-color: rgb(234, 237, 241)
+        .menu
           .group-title
             height: 56px
             font-size: 14px
             line-height: 56px
             color: rgb(153, 153, 153)
             background-color: rgb(243, 243, 243)
-          .el-menu-item
+          .menu-item
             font-size: 12px
             height: 40px
             line-height: 40px
-          .el-menu-item.is-active
-            background-color: #fff !important
-          .el-menu-item:before
+            cursor: pointer
+          .menu-item:hover
+            color: #1ABC9C
+          .is-active
+            background-color: #fff
+            color: #1ABC9C
+          .menu-item:before
             content: '• '
-          .el-menu-item-group__title
-            height: 56px
-            font-size: 14px
-            line-height: 56px
-            color: rgb(153, 153, 153)
-            background-color: rgb(243, 243, 243)
+  .el-popover
+    .popover
+      padding-bottom: 20px
+      .title
+        padding: 10px
+        border-bottom: 1px solid #dddddd
+        .fr
+          float: right
+          color: #1ABC9C
+          cursor: pointer
+    p:not(:first-child)
+      font-size: 14px
+      margin-top: 20px
 </style>
