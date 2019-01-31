@@ -122,6 +122,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+  @import "../assets/css/common"
   .el-container
     .el-header
       background-color: rgba(70, 76, 91, 0.898)
@@ -171,7 +172,11 @@ export default {
           height: 100%
           vertical-align: middle
     .el-container
+      .el-main
+        margin: 0
+        padding: 0
       .el-aside
+        border-right: 1px solid rgb(228, 228, 228)
         height: 100%
         background-color: rgb(234, 237, 241)
         .menu
