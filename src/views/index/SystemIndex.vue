@@ -6,26 +6,26 @@
         <div class="card"><img src="../../assets/index/icon-1.png" alt="">
           <div class="p-box">
             <p>今日订单总数</p>
-            <p class="number">0</p>
+            <p class="number">{{data.todayOrderNum||0}}</p>
           </div>
         </div>
         <div class="card"><img src="../../assets/index/icon-2.png" alt="">
           <div class="p-box">
             <p>今日销售总额</p>
-            <p class="number">0</p>
+            <p class="number">{{data.todayOrderMoney||0}}</p>
           </div>
         </div>
         <div class="card">
           <img src="../../assets/index/icon-3.png" alt="">
           <div class="p-box">
             <p>昨日销售总额</p>
-            <p class="number">0</p>
+            <p class="number">{{data.yesterdayOrderMoney||0}}</p>
           </div>
         </div>
         <div class="card" style="margin: 0"><img src="../../assets/index/icon-4.png" alt="">
           <div class="p-box">
             <p>近7天销售总额</p>
-            <p class="number">0</p>
+            <p class="number">{{data.nearlySevenDaysOrderMoney||0}}</p>
           </div>
         </div>
       </div>
@@ -52,25 +52,99 @@
           运营快捷入口
         </div>
         <div class="box-content">
-          <div class="item">
-            <img src="../../assets/index/icon-5.png">
-            <p>添加商品</p>
+          <div class="item mw" v-for="(nape, index) in entryList" :key="index" @click="linkUrl(nape.path)">
+            <img :src="nape.icon">
+            <p>{{nape.text}}</p>
           </div>
-          <div class="item">
-            <img src="../../assets/index/icon-6.png">
-            <p>订单列表</p>
+        </div>
+      </div>
+      <div class="overview">
+        <div class="box half-box mr-ten-percent">
+          <div class="box-title">
+            商品总览
           </div>
-          <div class="item">
-            <img src="../../assets/index/icon-7.png">
-            <p>用户管理</p>
+          <div class="box-content">
+            <div class="item">
+              <p class="number red">400</p>
+              <p>已下架</p>
+            </div>
+            <div class="item">
+              <p class="number red">100</p>
+              <p>已上架</p>
+            </div>
+            <div class="item">
+              <p class="number red">50</p>
+              <p>库存紧张</p>
+            </div>
+            <div class="item">
+              <p class="number red">500</p>
+              <p>全部商品</p>
+            </div>
           </div>
-          <div class="item">
-            <img src="../../assets/index/icon-8.png">
-            <p>交易统计</p>
+        </div>
+        <div class="box half-box ">
+          <div class="box-title">
+            用户总览
           </div>
-          <div class="item">
-            <img src="../../assets/index/icon-9.png">
-            <p>广告管理</p>
+          <div class="box-content">
+            <div class="item">
+              <p class="number red">100</p>
+              <p>今日新增</p>
+            </div>
+            <div class="item">
+              <p class="number red">200</p>
+              <p>昨日新增</p>
+            </div>
+            <div class="item">
+              <p class="number red">1000</p>
+              <p>本月新增</p>
+            </div>
+            <div class="item">
+              <p class="number red">5000</p>
+              <p>会员总数</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box-title">
+          订单统计
+        </div>
+        <div class="box-content">
+          <div class="aside">
+            <div class="aside-item">
+              <p>本月订单总数</p>
+              <p class="number default">10000</p>
+              <p class="compare"><img src="../../assets/common/u1291.png"><span class="green"> 10%</span> 同比上月</p>
+            </div>
+            <div class="aside-item">
+              <p>本周订单总数</p>
+              <p class="number default">1000</p>
+              <p class="compare"><img src="../../assets/common/u1284.png"><span class="red"> 10%</span> 同比上周</p>
+            </div>
+          </div>
+          <div class="content">
+          </div>
+        </div>
+      </div>
+      <div class="box">
+        <div class="box-title">
+          销售统计
+        </div>
+        <div class="box-content">
+          <div class="aside">
+            <div class="aside-item">
+              <p>本月销售总额</p>
+              <p class="number default">100000</p>
+              <p class="compare"><img src="../../assets/common/u1291.png"><span class="green"> 10%</span> 同比上月</p>
+            </div>
+            <div class="aside-item">
+              <p>本周销售总额</p>
+              <p class="number default">50000</p>
+              <p class="compare"><img src="../../assets/common/u1284.png"><span class="red"> 10%</span> 同比上周</p>
+            </div>
+          </div>
+          <div class="content">
           </div>
         </div>
       </div>
@@ -83,12 +157,57 @@ import TitleBar from '../common/TitleBar'
 
 export default {
   name: 'SystemIndex',
+  components: { TitleBar },
   data () {
     return {
-      nameZh: '系统首页'
+      nameZh: '系统首页',
+      data: {
+        todayOrderNum: 0,
+        todayOrderMoney: 0,
+        yesterdayOrderMoney: 0,
+        nearlySevenDaysOrderMoney: 0
+      },
+      entryList: [
+        {
+          icon: require('@/assets/index/icon-5.png'),
+          text: '添加商品',
+          path: '/goods/addGoods'
+        },
+        {
+          icon: require('@/assets/index/icon-6.png'),
+          text: '订单列表',
+          path: '/order/orderList'
+        },
+        {
+          icon: require('@/assets/index/icon-7.png'),
+          text: '用户管理',
+          path: '/user/userList'
+        },
+        {
+          icon: require('@/assets/index/icon-8.png'),
+          text: '交易统计',
+          path: '/statistics/tranStatistics'
+        },
+        {
+          icon: require('@/assets/index/icon-10.png'),
+          text: '广告管理',
+          path: '/operation/adList'
+        }
+      ]
     }
   },
-  components: { TitleBar }
+  methods: {
+    linkUrl (path) {
+      this.$router.push(path)
+    }
+  },
+  mounted () {
+    this.$http.post('merchant_order/getOrderAllCount', {
+      merchantId: JSON.parse(this.$store.getters.userInfo).merchantId
+    }).then((res) => {
+      this.data = res
+    })
+  }
 }
 </script>
 
@@ -96,6 +215,7 @@ export default {
   @import "../../assets/css/common"
   .main
     background-color: $bgColor
+    padding-bottom: 20px
     .content
       padding-top: 20px
       width: 80%
@@ -165,7 +285,7 @@ export default {
       min-width: 1060px
       background-color: white
       margin-top: 20px
-      height: 198px
+      min-height: 198px
       border: 1px solid $borderGray
       .box-title
         text-align: left
@@ -179,29 +299,73 @@ export default {
         padding-left: 20px
       .box-content
         display: flex
+        .mw
+          max-width: 120px
+          cursor: pointer
         .item
           flex: 1
           height: 153px
-          max-width: 120px
           display: flex
           flex-direction: column
           justify-content: center
           align-items: center
-          cursor: pointer
           border-left: 1px solid white
           border-right: 1px solid white
         .item:first-child
           border-left: none
-        .item:hover
+        .mw:hover
           background-color: $bgColor
           border-left: 1px solid $borderGray
           border-right: 1px solid $borderGray
           p
             color: #1ABC9C
-        .item:first-child:hover
+        .mw:first-child:hover
           background-color: $bgColor
           border-left: none
           border-right: 1px solid $borderGray
           p
             color: #1ABC9C
+        .aside
+          height: 322px
+          flex: 1
+          border-right: 1px solid $borderGray
+          .aside-item
+            margin: 20px 0
+            p
+              font-size: 12px
+              color: #989898
+              img
+                vertical-align: top
+            .compare
+              color: #CCCCCC
+            .default
+              color: #666666
+        .content
+          margin: 0
+          padding: 0
+          height: 322px
+          flex: 7
+    .half-box
+      width: 48%
+      min-width: 508px
+    .mr-ten-percent
+      margin-right: 4%
+
+  .overview
+    display: flex
+
+  .red
+    color: red
+
+  .number
+    font-size: 28px !important
+    font-weight: 400
+    line-height: 36px
+
+  .green
+    color: #1ABC9C
+
+  .triangle
+    width: 0
+    border-top: 12px
 </style>

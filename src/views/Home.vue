@@ -74,7 +74,7 @@ export default {
   data () {
     return {
       nav: nav,
-      mainHeight: window.innerHeight - 90,
+      mainHeight: window.innerHeight - 50,
       loginData: [{}, {}]
     }
   },
@@ -125,8 +125,11 @@ export default {
   @import "../assets/css/common"
   .el-container
     .el-header
-      background-color: rgba(70, 76, 91, 0.898)
+      position: fixed
+      z-index: 100
+      background-color: rgb(89,94,108)
       min-width: 1300px
+      width: 100%
       .banner
         line-height: 50px
         float: left
@@ -172,10 +175,12 @@ export default {
           height: 100%
           vertical-align: middle
     .el-container
+      margin-top: 50px
       .el-main
-        margin: 0
+        margin: 0 0 0 200px
         padding: 0
       .el-aside
+        position: fixed
         border-right: 1px solid rgb(228, 228, 228)
         height: 100%
         background-color: rgb(234, 237, 241)
