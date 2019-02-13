@@ -1,58 +1,57 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Login = () => import('./views/Login')
-const Home = () => import('./views/Home')
+const Login = () => import('@/views/Login')
+const Home = () => import('@/views/Home')
 
-const SystemIndex = () => import('./views/index/SystemIndex')
-const AccountSetting = () => import('./views/index/AccountSetting')
-const SystemInfo = () => import('./views/index/SystemInfo')
-const LoginLog = () => import('./views/index/LoginLog')
+const SystemIndex = () => import('@/views/index/SystemIndex')
+const AccountSetting = () => import('@/views/index/AccountSetting')
+const SystemInfo = () => import('@/views/index/SystemInfo')
+const LoginLog = () => import('@/views/index/LoginLog')
 
-const GoodsList = () => import('./views/goods/GoodsList')
-const AddGoods = () => import('./views/goods/AddGoods')
-const GoodsRecycle = () => import('./views/goods/GoodsRecycle')
-const GoodsComment = () => import('./views/goods/GoodsComment')
-const GoodsCategory = () => import('./views/goods/GoodsCategory')
-const GoodsType = () => import('./views/goods/GoodsType')
-const BrandManage = () => import('./views/goods/BrandManage')
-const ImgManage = () => import('./views/goods/ImgManage')
+const GoodsList = () => import('@/views/goods/GoodsList')
+const AddGoods = () => import('@/views/goods/AddGoods')
+const GoodsRecycle = () => import('@/views/goods/GoodsRecycle')
+const GoodsComment = () => import('@/views/goods/GoodsComment')
+const GoodsCategory = () => import('@/views/goods/GoodsCategory')
+const GoodsType = () => import('@/views/goods/GoodsType')
+const BrandManage = () => import('@/views/goods/BrandManage')
+const ImgManage = () => import('@/views/goods/ImgManage')
 
-const OrderList = () => import('./views/order/OrderList')
-const Confirm = () => import('./views/order/Confirm')
-const OrderSetting = () => import('./views/order/OrderSetting')
-const Return = () => import('./views/order/Return')
-const Refund = () => import('./views/order/Refund')
-const ReturnReason = () => import('./views/order/ReturnReason')
+const OrderList = () => import('@/views/order/OrderList')
+const Confirm = () => import('@/views/order/Confirm')
+const OrderSetting = () => import('@/views/order/OrderSetting')
+const Return = () => import('@/views/order/Return')
+const Refund = () => import('@/views/order/Refund')
+const ReturnReason = () => import('@/views/order/ReturnReason')
 
-const Storage = () => import('./views/stock/Storage')
-const Out = () => import('./views/stock/Out')
+const Storage = () => import('@/views/stock/Storage')
+const Out = () => import('@/views/stock/Out')
 
-const UserList = () => import('./views/user/UserList')
+const UserList = () => import('@/views/user/UserList')
 
-const SpikeList = () => import('./views/promotion/SpikeList')
-const TimeList = () => import('./views/promotion/TimeList')
+const SpikeList = () => import('@/views/promotion/SpikeList')
+const TimeList = () => import('@/views/promotion/TimeList')
 
-const AdList = () => import('./views/operation/AdList')
-const AddAd = () => import('./views/operation/AddAd')
+const AdList = () => import('@/views/operation/AdList')
+const AddAd = () => import('@/views/operation/AddAd')
 
-const TranStatistics = () => import('./views/statistics/TranStatistics')
-const GoodsStatistics = () => import('./views/statistics/GoodsStatistics')
-const SearchStatistics = () => import('./views/statistics/SearchStatistics')
+const TranStatistics = () => import('@/views/statistics/TranStatistics')
+const GoodsStatistics = () => import('@/views/statistics/GoodsStatistics')
+const SearchStatistics = () => import('@/views/statistics/SearchStatistics')
 
-const ComprehensiveStatistics = () => import('./views/finance/ComprehensiveStatistics')
-const SalesStatistics = () => import('./views/finance/SalesStatistics')
-const ReconciliationList = () => import('./views/finance/ReconciliationList')
+const ComprehensiveStatistics = () => import('@/views/finance/ComprehensiveStatistics')
+const SalesStatistics = () => import('@/views/finance/SalesStatistics')
+const ReconciliationList = () => import('@/views/finance/ReconciliationList')
 
-const Logistics = () => import('./views/settings/Logistics')
-const AreaSetting = () => import('./views/settings/AreaSetting')
+const Logistics = () => import('@/views/settings/Logistics')
+const AreaSetting = () => import('@/views/settings/AreaSetting')
 
-const OperationLog = () => import('./views/permission/OperationLog')
+const OperationLog = () => import('@/views/permission/OperationLog')
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {

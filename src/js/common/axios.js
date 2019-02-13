@@ -12,7 +12,7 @@ axios.interceptors.request.use((config) => {
   if (config.type === 'form' && config.type !== 'image') {
     config.data = qs.stringify(config.data)
   } else {
-    config.header['Content-Type'] = 'application/json; charset=UTF-8'
+    config.headers['Content-Type'] = 'application/json; charset=UTF-8'
   }
   return config
 }, error => {

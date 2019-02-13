@@ -1,3 +1,8 @@
 export default {
-  api: 'http://47.107.167.164:8080/'
+  api: process.env.NODE_ENV === 'production'
+    ? 'https://ls.diandianyuyue.com'
+    : '/api/',
+  reg: {
+    phone: /^1[345678]{1}\d{9}$/
+  }
 }

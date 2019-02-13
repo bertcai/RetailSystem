@@ -32,19 +32,19 @@
       <table>
         <caption class="table-title">待处理事务</caption>
         <tr>
-          <td>代付款订单<span>({{0}})</span></td>
-          <td>已完成订单<span>({{0}})</span></td>
-          <td>待确认退货订单<span>({{0}})</span></td>
+          <td @click="linkOrder">待付款订单<span>({{data.dfk}})</span></td>
+          <td @click="linkOrder">已完成订单<span>({{data.ywc}})</span></td>
+          <td @click="linkOrder">待确认退货订单<span>({{data.dqrth}})</span></td>
         </tr>
         <tr>
-          <td>待发货订单<span>({{0}})</span></td>
-          <td>新缺货登记<span>({{0}})</span></td>
-          <td>待处理退款详情<span>({{0}})</span></td>
+          <td @click="linkOrder">待发货订单<span>({{data.dfh}})</span></td>
+          <td @click="linkOrder">新缺货登记<span>({{0}})</span></td>
+          <td @click="linkOrder">待处理退款详情<span>({{data.dcltk}})</span></td>
         </tr>
         <tr>
-          <td>已发货订单<span>({{0}})</span></td>
-          <td>待处理退货订单<span>({{0}})</span></td>
-          <td>广告位即将到期<span>({{0}})</span></td>
+          <td @click="linkOrder">已发货订单<span>({{data.dsh}})</span></td>
+          <td @click="linkOrder">待处理退货订单<span>({{0}})</span></td>
+          <td @click="linkAdvertising">广告位即将到期<span>({{0}})</span></td>
         </tr>
       </table>
       <div class="box">
@@ -65,19 +65,19 @@
           </div>
           <div class="box-content">
             <div class="item">
-              <p class="number red">400</p>
+              <p class="number red">{{goodsData.notPull}}</p>
               <p>已下架</p>
             </div>
             <div class="item">
-              <p class="number red">100</p>
+              <p class="number red">{{goodsData.put}}</p>
               <p>已上架</p>
             </div>
             <div class="item">
-              <p class="number red">50</p>
+              <p class="number red">{{goodsData.count}}</p>
               <p>库存紧张</p>
             </div>
             <div class="item">
-              <p class="number red">500</p>
+              <p class="number red">{{goodsData.all}}</p>
               <p>全部商品</p>
             </div>
           </div>
@@ -88,19 +88,19 @@
           </div>
           <div class="box-content">
             <div class="item">
-              <p class="number red">100</p>
+              <p class="number red">{{userData.todayAddUserCount}}</p>
               <p>今日新增</p>
             </div>
             <div class="item">
-              <p class="number red">200</p>
+              <p class="number red">{{userData.yesterdayAddUserCount}}</p>
               <p>昨日新增</p>
             </div>
             <div class="item">
-              <p class="number red">1000</p>
+              <p class="number red">{{userData.monthAddUserCount}}</p>
               <p>本月新增</p>
             </div>
             <div class="item">
-              <p class="number red">5000</p>
+              <p class="number red">{{userData.allUserCount}}</p>
               <p>会员总数</p>
             </div>
           </div>
@@ -161,6 +161,8 @@ export default {
   data () {
     return {
       nameZh: '系统首页',
+      userData: {},
+      goodsData: {},
       data: {
         todayOrderNum: 0,
         todayOrderMoney: 0,
@@ -199,6 +201,12 @@ export default {
   methods: {
     linkUrl (path) {
       this.$router.push(path)
+    },
+    linkOrder () {
+      this.$router.push('/order/orderList')
+    },
+    linkAdvertising () {
+      this.$router.push('/operation/adList')
     }
   },
   mounted () {
@@ -206,6 +214,13 @@ export default {
       merchantId: JSON.parse(this.$store.getters.userInfo).merchantId
     }).then((res) => {
       this.data = res
+      console.log(res)
+    })
+    this.$http.post('merchant/merchant_index').then((res) => {
+      this.userData = res
+    })
+    this.$http.post('merchantGoods/goodsCountStatistics').then((res) => {
+      this.goodsData = res
     })
   }
 }
