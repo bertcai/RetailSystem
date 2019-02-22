@@ -232,9 +232,9 @@ export default {
     background-color: $bgColor
     padding-bottom: 20px
     .content
-      padding-top: 20px
-      width: 80%
+      padding: 20px
       margin: 0 auto
+      overflow: auto
     .row
       display: flex
       height: 100px

@@ -124,9 +124,11 @@ export default {
 <style lang="sass" scoped>
   @import "../assets/css/common"
   .el-container
+    position: fixed
+    width: 100vw
+    height: 100vh
     overflow: auto
     .el-header
-      position: fixed
       z-index: 100
       background-color: rgb(89,94,108)
       min-width: 1300px
@@ -176,18 +178,17 @@ export default {
           height: 100%
           vertical-align: middle
     .el-container
-      overflow: auto
+      width: 100%
       margin-top: 50px
       .el-main
-        margin: 0 0 0 200px
         padding: 0
+        overflow: auto
       .el-aside
-        position: fixed
         border-right: 1px solid rgb(228, 228, 228)
         height: 100%
         background-color: rgb(234, 237, 241)
+        overflow: auto
         .menu
-          overflow: auto
           .group-title
             height: 56px
             font-size: 14px

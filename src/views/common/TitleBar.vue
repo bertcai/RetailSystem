@@ -1,7 +1,7 @@
 <template>
   <div class="title-bar">
     <p>{{title}}</p>
-    <el-button plain type="primary" icon="el-icon-refresh" size="medium" v-if="refreshButton">刷新</el-button>
+    <el-button plain type="primary" icon="el-icon-refresh" size="medium" v-if="refreshButton" @click="refresh">刷新</el-button>
   </div>
 </template>
 
@@ -13,6 +13,11 @@ export default {
     refreshButton: {
       type: Boolean,
       default: true
+    }
+  },
+  methods: {
+    refresh () {
+      this.$router.go(0)
     }
   }
 }

@@ -9,11 +9,12 @@ axios.defaults.baseURL = CONFIG.api
 axios.defaults.timeout = 5000
 axios.interceptors.request.use((config) => {
   config.withCredentials = true
-  if (config.type === 'form' && config.type !== 'image') {
+  if (config.type === 'form' && config.file !== 'image') {
     config.data = qs.stringify(config.data)
   } else {
     config.headers['Content-Type'] = 'application/json; charset=UTF-8'
   }
+  console.log(config.headers)
   return config
 }, error => {
   Message.error('请求超时')
