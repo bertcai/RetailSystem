@@ -145,9 +145,10 @@ export default {
     padding-bottom: 20px;
     .card{
       margin: 20px auto 0;
-      width: 90%;
-      min-width: 1024px;
+      width: 70%;
+      min-width: 600px;
       border: 1px solid $borderGray;
+      background-color: #fff;
       .card-title{
         border-bottom: 1px solid $borderGray;
         text-align: left;
